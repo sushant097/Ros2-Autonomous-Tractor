@@ -41,7 +41,7 @@ sudo apt install ros-$ROS_DISTRO-cv-bridge ros-$ROS_DISTRO-image-transport
 ```
 
 Replace `$ROS_DISTRO` with your ROS 2 distribution (e.g., `humble`).
-```
+
 
 ## New Update:
 To efficiently detect obstacles within 5 meters in a **wide area** covering the front and sides of the tractor (e.g., ±0.5 meters to the left and right), we can:
