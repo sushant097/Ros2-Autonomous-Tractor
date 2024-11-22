@@ -206,7 +206,7 @@ The tractor reached to goal point autonomously using PID algorithm and data from
 ## Future Work
 1. **Base Station Setup:**
 * Improve localization accuracy within centimeter-level precision by integrating a base station for RTK GPS corrections.
-2. **Use of Lidar and SLAM:**
+2. **Use of LIDAR and SLAM:**
 * Integrate LIDAR sensors and implement SLAM (Simultaneous Localization and Mapping) for advanced path planning.
 
 3. **Complex Terrain Navigation:**
