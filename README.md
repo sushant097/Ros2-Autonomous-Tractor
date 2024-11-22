@@ -187,7 +187,7 @@ The tractor reached to goal point autonomously using PID algorithm and data from
 3. **Complex Terrain Navigation:**
 * Enhance the tractor's capabilities to handle complex and uneven terrain for broader agricultural applications.
 
---
+---
 ## **Contributors**
 
 * **Charles Raines**
