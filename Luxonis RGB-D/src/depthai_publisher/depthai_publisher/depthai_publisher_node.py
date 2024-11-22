@@ -2,9 +2,11 @@ import rclpy
 from rclpy.node import Node
 import cv2
 import depthai as dai
+import numpy as np
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from std_msgs.msg import Float32
+
 
 class DepthAIPublisherNode(Node):
     def __init__(self):
@@ -13,7 +15,6 @@ class DepthAIPublisherNode(Node):
         # ROS publishers
         self.rgb_pub = self.create_publisher(Image, 'camera/rgb', 10)
         self.depth_pub = self.create_publisher(Image, 'camera/depth', 10)
-        self.distance_pub = self.create_publisher(Float32, 'camera/distance', 10)
 
         # Bridge for OpenCV to ROS image conversion
         self.bridge = CvBridge()
@@ -41,7 +42,7 @@ class DepthAIPublisherNode(Node):
 
         # Output streams
         color_cam = self.pipeline.create(dai.node.ColorCamera)
-        color_cam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_1080_P)
+        color_cam.setResolution(dai.ColorCameraProperties.SensorResolution.THE_800_P)
         color_cam.setFps(30)
 
         xout_rgb = self.pipeline.create(dai.node.XLinkOut)
@@ -69,17 +70,34 @@ class DepthAIPublisherNode(Node):
         in_depth = self.depth_queue.get()
         depth_frame = in_depth.getFrame()
 
-        # Calculate distance at center
-        height, width = depth_frame.shape
-        center_x, center_y = width // 2, height // 2
-        distance_mm = depth_frame[center_y, center_x]
-        distance_m = distance_mm / 1000.0  # Convert to meters
+        # Convert depth values from millimeters to meters
+        depth_in_meters = depth_frame / 1000.0  # Convert entire frame to meters
 
-        # Publish distance
-        distance_msg = Float32()
-        distance_msg.data = distance_m
-        self.distance_pub.publish(distance_msg)
-        self.get_logger().info(f"Distance to object: {distance_m:.2f} meters")
+        # Define Region of Interest (ROI)
+        height, width = depth_in_meters.shape
+        center_x = width // 2
+        left_bound = max(0, center_x - int(0.5 * width / 2))  # Adjust to cover ±0.5 meters
+        right_bound = min(width, center_x + int(0.5 * width / 2))
+        top_bound = int(height * 0.4)  # Focus on the lower half of the frame
+        bottom_bound = height
+
+        # Extract ROI for obstacle detection
+        roi = depth_in_meters[top_bound:bottom_bound, left_bound:right_bound]
+
+        # Check for obstacles in the ROI
+        obstacle_pixels = roi <= 5.0  # Boolean mask for pixels ≤ 5 meters
+        obstacle_count = np.sum(obstacle_pixels)  # Count the number of such pixels
+
+        # Obstacle detection logic
+        obstacle_threshold = 1000  # Threshold for obstacle pixel count
+        if obstacle_count > obstacle_threshold:
+            self.get_logger().warn(
+                f"Stop, Object detected within 5 meters in ROI: {obstacle_count} pixels"
+            )
+        else:
+            self.get_logger().info(
+                f"Safe: Only {obstacle_count} pixels within 5 meters in ROI"
+            )
 
         # Convert RGB frame to ROS Image and publish
         rgb_msg = self.bridge.cv2_to_imgmsg(rgb_frame, encoding="bgr8")
@@ -89,12 +107,14 @@ class DepthAIPublisherNode(Node):
         depth_msg = self.bridge.cv2_to_imgmsg(depth_frame, encoding="mono16")
         self.depth_pub.publish(depth_msg)
 
+ 
 def main(args=None):
     rclpy.init(args=args)
     node = DepthAIPublisherNode()
     rclpy.spin(node)
     node.destroy_node()
     rclpy.shutdown()
+
 
 if __name__ == '__main__':
     main()
