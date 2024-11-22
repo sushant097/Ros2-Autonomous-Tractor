@@ -1,4 +1,3 @@
-Here's a draft for your `README.md` file:
 # Ros2-Autonomous-Tractor
 
 ## Overview
