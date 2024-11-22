@@ -197,5 +197,5 @@ The tractor reached to goal point autonomously using PID algorithm and data from
 
 ## **License**
 
-This project is licensed under the MIT License.
+The license to use this project is mentioned [here](./LICENSE).
 

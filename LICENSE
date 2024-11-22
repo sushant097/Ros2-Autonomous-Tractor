@@ -1,21 +1,50 @@
-MIT License
+                                 Customized Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+		
 
-Copyright (c) 2024 sushant097
+AUTONOMOUS TRACTOR PROJECT LICENSE
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION:
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+
+
+1. Definitions
+
+- "License" means the terms and conditions for use, reproduction, and distribution as defined by Sections 1 through 9 of this document.
+
+- "Licensor" means **Sushant Gautam and Contributors**, as the copyright owners of the Autonomous Tractor Project.
+
+- "Contributor" means any individual or legal entity who has submitted work to this project, including but not limited to source code, documentation, or configurations.
+
+- "You" (or "Your") means any individual or legal entity exercising permissions granted under this License.
+
+- "Work" refers to the Autonomous Tractor Project in its entirety, including all files, configurations, and documentation covered under this License.
+
+- "Source" form refers to the preferred form for making modifications, including source code, documentation source, and configuration files.
+
+- "Object" form refers to compiled or mechanically processed forms of the Source form.
+
+
+
+2. License Grant
+
+Copyright
+Subject to the conditions of this License, each Contributor grants you a non-exclusive, royalty-free, worldwide copyright license to use, reproduce, and distribute the Work in Source or Object form.
+
+Patents
+You may freely use and modify the Work provided that any Derivative Works include the same license.
+
+
+
+3. Usage Restrictions
+
+1. Modifications must be disclosed:
+   - Any modifications or extensions must be clearly stated in accompanying documentation or source headers.
+   - Derivative software should clearly credit the original "Autonomous Tractor Project."
+
+2. Redistribution:
+   - Retain the notice of this customized Apache License within the distributed package.
+   - Redistributed copies must also include references and give credit to original authors of `ROS2`.
+  
