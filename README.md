@@ -1,4 +1,4 @@
-# **README: ROS 2 Autonomous Tractor with PID Control**
+# **ROS 2 Autonomous Tractor with PID Control**
 
 
 ## **Overview**
