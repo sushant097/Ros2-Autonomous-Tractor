@@ -29,6 +29,31 @@ The following diagram illustrates the **overall system architecture**:
 ![abe_tractor](https://github.com/user-attachments/assets/2eeb0c0b-cb34-487b-b1fa-6d77914fae9e)
 
 
+The following diagram illustrates the **overall ROS2 integration message flow**:
+
+![image](https://github.com/user-attachments/assets/345f2ac2-dc23-452a-bd9e-84cedc60b9b8)
+
+
+As shown in the figures above, the ROS 2 system operates as follows:
+1. **GPS Driver Node**:
+   - The GPS unit collects **LLA (Latitude, Longitude, Altitude)** data and publishes it as a `NavSatFix` message to the `/gps/fix` topic.
+2. **Camera Driver Node**:
+   - The RGB-D camera collects depth data and publishes it as a `3DArray` message to the `/camera/depth` topic.
+3. **Simple GPS Controller Node**:
+   - Subscribes to the `/gps/fix` and `/camera/depth` topics.
+   - Processes GPS and camera data to compute control commands.
+   - Publishes a `Twist` message to the `/cmd_vel` topic, containing linear and angular velocity commands.
+4. **Serial Command Publisher Node**:
+   - Subscribes to the `/cmd_vel` topic.
+   - Converts the `Twist` message into serial commands and sends them to the Arduino via a serial connection.
+5. **Arduino**:
+   - Receives serial commands and translates them into PWM signals.
+   - These signals control:
+     - **Linear Actuator**: For forward/backward acceleration based on `linear.x`.
+     - **Stepper Motor**: For steering adjustments based on `angular.z`.
+
+This architecture ensures seamless communication between sensors, actuators, and control modules to achieve autonomous navigation and obstacle avoidance.
+
 ---
 
 ## **How It Works**
