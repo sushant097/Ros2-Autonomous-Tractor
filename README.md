@@ -166,10 +166,10 @@ pip install -r requirements.txt
 
 ## **Results**
 
-### **Simulated Trajectory**
-The figure below shows the tractor's trajectory as it follows the shortest path to the goal:
+### **Output**
+The tractor reached to goal point autonomously using PID algorithm and data from GPS and help of actuators.
 
-*(Insert generated trajectory plot here)*
+
 
 ### **Performance Metrics**
 - **Goal Accuracy**: Reaches the goal within a **5-meter tolerance**.
